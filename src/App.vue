@@ -63,35 +63,37 @@ function deleteTask(index) {
 </script>
 
 <template>
-  <h2>to do app</h2>
-  <h1>{{ message }}</h1>
-  <h1>
-    {{ name }}
-    <span v-if="status === 'active'">is active</span>
-    <span v-else-if="status === 'inactive'">is inactive</span>
-    <span v-else-if="status === 'pending'">pending...</span>
-    <span v-else>status not found</span>
-  </h1>
-  <h2>Tasks</h2>
-  <form @submit.prevent="addTask">
-    <label for="newTask">New Task</label>
-    <input type="text" id="newTask" name="newTask" v-model="newTask" />
-    <input type="submit" value="Add Task" />
-  </form>
-  <ul>
-    <li v-for="(task, index) in tasks" :key="task">
-      <span>{{ task }}</span>
-      <button @click="deleteTask(index)">delete</button>
-    </li>
-  </ul>
-  <a :href="link">visit google</a>
-  <br />
-  <!-- <button v-on:click="changeStatusToActive">active</button> -->
-  <button @click="changeStatusToActive">active</button>
-  <button @click="changeStatusToInactive">inactive</button>
-  <button @click="changeStatusToPending">pending</button>
-  <br />
-  <br />
+  <h2 class="bg-slate-700 p-16 text-white text-3xl text-center">to do app</h2>
+  <div class="bg-gray-300 p-10">
+    <h1>{{ message }}</h1>
+    <h1>
+      {{ name }}
+      <span v-if="status === 'active'">is active</span>
+      <span v-else-if="status === 'inactive'">is inactive</span>
+      <span v-else-if="status === 'pending'">pending...</span>
+      <span v-else>status not found</span>
+    </h1>
+    <h2>Tasks</h2>
+    <form @submit.prevent="addTask">
+      <label for="newTask">New Task</label>
+      <input type="text" id="newTask" name="newTask" v-model="newTask" />
+      <input type="submit" value="Add Task" />
+    </form>
+    <ul>
+      <li v-for="(task, index) in tasks" :key="task">
+        <span>{{ task }}</span>
+        <button @click="deleteTask(index)">delete</button>
+      </li>
+    </ul>
+    <a :href="link">visit google</a>
+    <br />
+    <!-- <button v-on:click="changeStatusToActive">active</button> -->
+    <button @click="changeStatusToActive">active</button>
+    <button @click="changeStatusToInactive">inactive</button>
+    <button @click="changeStatusToPending">pending</button>
+    <br />
+    <br />
+  </div>
 </template>
 
 <style scoped>
