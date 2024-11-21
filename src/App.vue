@@ -5,6 +5,7 @@ import { ref } from "vue"
 const name = ref("mir kamrul ahsan asif")
 const status = ref("active")
 const tasks = ref(["task-1 composition api", "task-2", "task-3"])
+const newTask = ref("")
 
 const changeStatusToActive = () => {
   status.value = "active"
@@ -14,6 +15,17 @@ const changeStatusToInactive = () => {
 }
 const changeStatusToPending = () => {
   status.value = "pending"
+}
+
+function addTask() {
+  if (newTask.value.trim() !== "") {
+    tasks.value.push(newTask.value)
+    newTask.value = ""
+  }
+}
+
+function deleteTask(index) {
+  tasks.value.splice(index, 1)
 }
 
 // return {
@@ -61,8 +73,16 @@ const changeStatusToPending = () => {
     <span v-else>status not found</span>
   </h1>
   <h2>Tasks</h2>
+  <form @submit.prevent="addTask">
+    <label for="newTask">New Task</label>
+    <input type="text" id="newTask" name="newTask" v-model="newTask" />
+    <input type="submit" value="Add Task" />
+  </form>
   <ul>
-    <li v-for="task in tasks" :key="task">{{ task }}</li>
+    <li v-for="(task, index) in tasks" :key="task">
+      <span>{{ task }}</span>
+      <button @click="deleteTask(index)">delete</button>
+    </li>
   </ul>
   <a :href="link">visit google</a>
   <br />
@@ -70,6 +90,8 @@ const changeStatusToPending = () => {
   <button @click="changeStatusToActive">active</button>
   <button @click="changeStatusToInactive">inactive</button>
   <button @click="changeStatusToPending">pending</button>
+  <br />
+  <br />
 </template>
 
 <style scoped>
